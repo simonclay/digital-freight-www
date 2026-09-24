@@ -1,0 +1,299 @@
+# Sveltia CMS config. See README.md "Content editing (Sveltia)" for how to
+# point `backend.repo` at the real private source repo once it exists, and
+# how local editing (no GitHub auth needed) works in the meantime.
+
+backend:
+  name: github
+  repo: simonclay/digital-freight-source # TODO: replace once the real repo exists
+  branch: main
+  # base_url: https://YOUR-AUTHENTICATOR.workers.dev  # only needed for real (non-local) GitHub login
+
+media_folder: public/assets/images/uploads
+public_folder: /assets/images/uploads
+
+collections:
+  - name: pages
+    label: Pages
+    files:
+      - name: home
+        label: Homepage
+        file: src/content/pages/home.json
+        fields:
+          - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
+          - { name: heroBadge, label: "Hero badge text", widget: string }
+          - { name: heroTitle, label: "Hero heading", widget: string }
+          - { name: heroSubtitle, label: "Hero paragraph", widget: text }
+          - name: heroStats
+            label: "Stat strip (4 shown)"
+            widget: list
+            fields:
+              - { name: value, widget: string }
+              - { name: label, widget: string }
+          - { name: servicesEyebrow, label: "Services: eyebrow", widget: string }
+          - { name: servicesTitle, label: "Services: heading", widget: string }
+          - { name: servicesLede, label: "Services: intro line", widget: text }
+          - { name: iorCardTitle, label: "Services grid: IOR/EOR card title", widget: string }
+          - { name: iorCardBody, label: "Services grid: IOR/EOR card text", widget: text }
+          - { name: iorCardLinkLabel, label: "Services grid: IOR/EOR card link text", widget: string }
+          - { name: sectorsEyebrow, label: "Sectors: eyebrow", widget: string }
+          - { name: sectorsTitle, label: "Sectors: heading", widget: string }
+          - { name: iorEyebrow, label: "IOR/EOR band: eyebrow", widget: string }
+          - { name: iorTitle, label: "IOR/EOR band: heading", widget: string }
+          - { name: iorLede, label: "IOR/EOR band: intro line", widget: text }
+          - name: iorFeatures
+            label: "IOR/EOR band: two feature cards"
+            widget: list
+            fields:
+              - { name: tag, label: "Tag label", widget: string }
+              - { name: title, widget: string }
+              - { name: body, widget: text }
+          - name: iorStats
+            label: "IOR/EOR band: \"what you get\" cards (4)"
+            widget: list
+            fields:
+              - { name: eyebrow, label: "Card number label", widget: string }
+              - { name: title, widget: string }
+              - { name: body, widget: text }
+          - { name: portalEyebrow, label: "Portal: eyebrow", widget: string }
+          - { name: portalTitle, label: "Portal: heading", widget: string }
+          - { name: portalBody, label: "Portal: intro line", widget: text }
+          - name: portalBullets
+            label: "Portal: bullet points (3)"
+            widget: list
+            fields:
+              - { name: label, label: "Bold lead-in", widget: string }
+              - { name: body, label: "Rest of the sentence", widget: string }
+          - { name: testimonialsEyebrow, label: "Testimonials: eyebrow", widget: string }
+          - { name: testimonialsTitle, label: "Testimonials: heading", widget: string }
+          - { name: testimonialsLede, label: "Testimonials: intro line", widget: text }
+          - { name: newsEyebrow, label: "News: eyebrow", widget: string }
+          - { name: newsTitle, label: "News: heading", widget: string }
+          - { name: contactTitle, label: "Contact banner: heading", widget: string }
+          - { name: contactBody, label: "Contact banner: text", widget: text }
+
+      - name: about
+        label: About us
+        file: src/content/pages/about.md
+        fields:
+          - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
+          - { name: heroTitle, label: "Hero heading", widget: string }
+          - { name: heroLede, label: "Hero paragraph", widget: text }
+          - name: motif
+            label: "Decorative icons"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: icon, label: "Main icon (Lucide icon name)", widget: string }
+              - { name: nodeTop, label: "Top-right icon", widget: string }
+              - { name: nodeBottom, label: "Bottom-left icon", widget: string }
+          - { name: introBody, label: "Intro paragraphs (leave a blank line between paragraphs)", widget: text }
+          - { name: ethosEyebrow, label: "Ethos: eyebrow", widget: string }
+          - { name: ethosTitle, label: "Ethos: heading", widget: string }
+          - { name: ethosLede, label: "Ethos: intro line", widget: text }
+          - name: ethosCards
+            label: "Ethos: cards (3 shown)"
+            widget: list
+            fields:
+              - { name: icon, label: "Icon (Lucide icon name)", widget: string }
+              - { name: title, label: Title, widget: string }
+              - { name: body, label: Body, widget: text }
+          - { name: allianceTitle, label: "Digital Alliance: heading", widget: string }
+          - { name: allianceBody, label: "Digital Alliance paragraphs (leave a blank line between paragraphs)", widget: text }
+          - name: stats
+            label: "Stat strip (4 shown)"
+            widget: list
+            fields:
+              - { name: value, widget: string }
+              - { name: label, widget: string }
+          - { name: ctaTitle, label: "Bottom banner title", widget: string }
+          - { name: ctaBody, label: "Bottom banner text", widget: string }
+
+      - name: ior-and-eor
+        label: IOR and EOR
+        file: src/content/pages/ior-and-eor.md
+        fields:
+          - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
+          - { name: heroTitle, label: "Hero heading", widget: string }
+          - { name: heroLede, label: "Hero paragraph", widget: text }
+          - name: motif
+            label: "Decorative icons"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: icon, label: "Main icon (Lucide icon name)", widget: string }
+              - { name: nodeTop, label: "Top-right icon", widget: string }
+              - { name: nodeBottom, label: "Bottom-left icon", widget: string }
+          - name: byline
+            label: "Author byline (optional)"
+            widget: object
+            required: false
+            collapsed: true
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: role, label: Role, widget: string }
+          - { name: benefitsTitle, label: "Sidebar: benefits card title", widget: string }
+          - { name: benefitsBody, label: "Sidebar: benefits card text", widget: text }
+          - { name: whoTitle, label: "Sidebar: \"who it's for\" card title", widget: string }
+          - { name: whoBody, label: "Sidebar: \"who it's for\" card text", widget: text }
+          - { name: statsEyebrow, label: "What you get: eyebrow", widget: string }
+          - { name: statsTitle, label: "What you get: heading", widget: string }
+          - name: stats
+            label: "What you get: cards (4)"
+            widget: list
+            fields:
+              - { name: eyebrow, label: "Card number label", widget: string }
+              - { name: title, widget: string }
+              - { name: body, widget: text }
+          - { name: ctaTitle, label: "Bottom banner title", widget: string }
+          - { name: ctaBody, label: "Bottom banner text", widget: string }
+          - { name: ctaLabel, label: "Bottom banner button text", widget: string }
+          - { name: ctaHref, label: "Bottom banner button link", widget: string }
+          - { name: body, label: "Article body (intro, IOR, EOR and summary sections)", widget: markdown }
+
+      - name: contact
+        label: Contact
+        file: src/content/pages/contact.json
+        fields:
+          - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
+          - { name: heroTitle, label: "Hero heading", widget: string }
+          - { name: heroLede, label: "Hero paragraph", widget: text }
+          - name: motif
+            label: "Decorative icons"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: icon, label: "Main icon (Lucide icon name)", widget: string }
+              - { name: nodeTop, label: "Top-right icon", widget: string }
+              - { name: nodeBottom, label: "Bottom-left icon", widget: string }
+          - { name: phoneLabel, label: "Phone: label", widget: string }
+          - { name: phoneNumber, label: "Phone: number (as displayed)", widget: string }
+          - { name: phoneHref, label: "Phone: link (e.g. tel:+441784818445)", widget: string }
+          - { name: addressLabel, label: "Address: label", widget: string }
+          - name: addressLines
+            label: "Address lines (one per line of the address)"
+            widget: list
+            field: { name: line, widget: string }
+          - { name: portalTitle, label: "Sidebar: portal card title", widget: string }
+          - { name: portalBody, label: "Sidebar: portal card text", widget: string }
+          - { name: portalLinkLabel, label: "Sidebar: portal card button text", widget: string }
+          - { name: portalHref, label: "Sidebar: portal card button link", widget: string }
+          - { name: mapEmbedUrl, label: "Google Maps embed URL", widget: string }
+          - { name: mapTitle, label: "Map iframe title (for accessibility)", widget: string }
+
+  - name: services
+    label: Services
+    folder: src/content/services
+    create: true
+    format: frontmatter
+    extension: md
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
+      - { name: heroLede, label: "Intro line (page banner + homepage card)", widget: text }
+      - { name: teaserLinkLabel, label: "Homepage card link text", widget: string, hint: "e.g. \"Road freight →\"" }
+      - name: motif
+        label: "Decorative icons"
+        widget: object
+        collapsed: true
+        fields:
+          - { name: icon, label: "Main icon (Lucide icon name)", widget: string }
+          - { name: nodeTop, label: "Top-right icon", widget: string }
+          - { name: nodeBottom, label: "Bottom-left icon", widget: string }
+      - name: features
+        label: "Feature list (3 shown)"
+        widget: list
+        fields:
+          - { name: icon, label: "Icon (Lucide icon name)", widget: string }
+          - { name: title, label: Title, widget: string }
+          - { name: body, label: Body, widget: text }
+      - { name: sidebarTitle, label: "Sidebar box title", widget: string }
+      - name: sidebarItems
+        label: "Sidebar items"
+        widget: list
+        fields:
+          - { name: label, widget: string }
+          - { name: value, widget: string }
+      - { name: ctaTitle, label: "Bottom banner title", widget: string }
+      - { name: ctaBody, label: "Bottom banner text", widget: string }
+      - { name: order, label: "Sort order (1, 2, 3...)", widget: number, value_type: int }
+      - { name: body, label: "Intro paragraph(s)", widget: markdown }
+
+  - name: sectors
+    label: Sectors
+    folder: src/content/sectors
+    create: true
+    format: frontmatter
+    extension: md
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: index, label: "Number badge (01, 02, 03, 04)", widget: string }
+      - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
+      - { name: heroLede, label: "Intro line (page banner + homepage card)", widget: text }
+      - name: motif
+        label: "Decorative icons"
+        widget: object
+        collapsed: true
+        fields:
+          - { name: icon, label: "Main icon (Lucide icon name)", widget: string }
+          - { name: nodeTop, label: "Top-right icon", widget: string }
+          - { name: nodeBottom, label: "Bottom-left icon", widget: string }
+      - name: features
+        label: "Feature list (3 shown)"
+        widget: list
+        fields:
+          - { name: icon, label: "Icon (Lucide icon name)", widget: string }
+          - { name: title, label: Title, widget: string }
+          - { name: body, label: Body, widget: text }
+      - { name: sidebarTitle, label: "Sidebar box title", widget: string }
+      - name: sidebarItems
+        label: "Sidebar items"
+        widget: list
+        field: { name: item, widget: string }
+      - { name: ctaTitle, label: "Bottom banner title", widget: string }
+      - { name: ctaBody, label: "Bottom banner text", widget: string }
+      - { name: order, label: "Sort order (1, 2, 3, 4)", widget: number, value_type: int }
+      - { name: body, label: "Intro paragraph(s)", widget: markdown }
+
+  - name: news
+    label: News
+    folder: src/content/news
+    create: true
+    format: frontmatter
+    extension: md
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: category, label: "Category label", widget: string, hint: "e.g. \"Customs\" or \"Portal · Product update\"" }
+      - { name: excerpt, label: "Card excerpt", widget: text }
+      - { name: image, label: "Featured image", widget: image, required: false }
+      - { name: imageAlt, label: "Image alt text", widget: string, required: false }
+      - { name: isSample, label: "Sample/placeholder article", widget: boolean, default: false, hint: "Shows a \"sample article\" notice on the page" }
+      - name: byline
+        label: "Author byline (optional)"
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: name, label: Name, widget: string }
+          - { name: role, label: Role, widget: string }
+      - { name: ctaTitle, label: "Bottom banner title", widget: string }
+      - { name: ctaBody, label: "Bottom banner text", widget: string }
+      - { name: ctaLabel, label: "Bottom banner button text", widget: string }
+      - { name: ctaHref, label: "Bottom banner button link", widget: string }
+      - { name: order, label: "Sort order (1, 2, 3...)", widget: number, value_type: int }
+      - { name: body, label: "Article body", widget: markdown }
+
+  - name: testimonials
+    label: Testimonials
+    folder: src/content/testimonials
+    create: true
+    format: frontmatter
+    extension: md
+    slug: "{{slug}}"
+    fields:
+      - { name: quote, label: Quote, widget: text }
+      - { name: name, label: "Role (e.g. \"Sales Director\")", widget: string }
+      - { name: role, label: Company, widget: string }
+      - { name: order, label: "Sort order (1-7)", widget: number, value_type: int }

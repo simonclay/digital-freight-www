@@ -1,0 +1,374 @@
+/* Site header: sticky nav, logo cross-fade, mega menus, mobile drawer */
+
+/* Reserves the header's height before the partial-loader injects it, so the
+   page doesn't jump once it arrives. */
+[data-include="header"]:empty {
+  display: block;
+  height: 5.125rem;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  margin-bottom: -5.125rem; /* -82px — hero sits directly under the floating header */
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  backdrop-filter: blur(0px);
+  transition: background var(--transition-base), border-color var(--transition-base),
+    backdrop-filter var(--transition-base);
+}
+
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom-color: var(--border-subtle);
+  backdrop-filter: blur(18px);
+}
+
+.header-inner {
+  height: 5.125rem; /* 82px */
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+/* ---------- Brand ---------- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex: none;
+  height: 34px;
+}
+
+.brand__icon {
+  height: 34px;
+  width: 34px;
+  display: block;
+}
+
+.brand__wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  color: var(--color-white);
+  white-space: nowrap;
+  transition: color var(--transition-base);
+}
+
+.site-header.is-scrolled .brand__wordmark {
+  color: var(--color-ink);
+}
+
+/* ---------- Nav ---------- */
+
+.header-panel {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.primary-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  font-size: var(--text-base-alt);
+  font-weight: 500;
+}
+
+.nav-static,
+.nav-link {
+  color: var(--color-white);
+  white-space: nowrap;
+  transition: color var(--transition-fast);
+}
+
+.site-header.is-scrolled .nav-static,
+.site-header.is-scrolled .nav-link {
+  color: #3D2A52;
+}
+
+.nav-static {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.nav-link:hover {
+  color: #FF7DBF;
+}
+
+.site-header.is-scrolled .nav-link:hover {
+  color: var(--color-eyebrow);
+}
+
+.nav-link.is-current {
+  color: #FF7DBF;
+  font-weight: 600;
+}
+
+.site-header.is-scrolled .nav-link.is-current {
+  color: var(--color-eyebrow);
+}
+
+.nav-item {
+  position: static;
+}
+
+.nav-link--menu {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link--menu svg {
+  width: 9px;
+  height: 9px;
+  opacity: 0.7;
+}
+
+.nav-item.is-open .nav-link--menu {
+  color: #FF7DBF;
+}
+
+.site-header.is-scrolled .nav-item.is-open .nav-link--menu {
+  color: var(--color-eyebrow);
+}
+
+.header-ctas {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex: none;
+}
+
+.header-ctas .btn--outline {
+  color: var(--color-white);
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.site-header.is-scrolled .header-ctas .btn--outline {
+  color: var(--color-ink-secondary);
+  border-color: var(--border-pill);
+}
+
+.header-ctas .btn--outline:hover {
+  border-color: var(--color-pink);
+  color: #FF7DBF;
+}
+
+.site-header.is-scrolled .header-ctas .btn--outline:hover {
+  color: var(--color-ink-secondary);
+}
+
+/* ---------- Mega menu ---------- */
+
+.mega-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5.125rem;
+  background: var(--bg-white);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-menu);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+}
+
+.nav-item.is-open .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.mega-menu__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 1.875rem 2.5rem 2.125rem;
+}
+
+.mega-menu__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-bottom: var(--space-5);
+}
+
+.mega-menu__head .eyebrow {
+  margin: 0;
+}
+
+.mega-menu__head a {
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.mega-menu__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+/* ---------- Mobile nav toggle ---------- */
+
+.nav-toggle {
+  display: none;
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-left: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: transparent;
+  color: var(--color-white);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.site-header.is-scrolled .nav-toggle {
+  color: var(--color-ink-secondary);
+  border-color: var(--border-pill);
+}
+
+.nav-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.nav-toggle .icon-close {
+  display: none;
+}
+
+.nav-toggle[aria-expanded="true"] .icon-menu {
+  display: none;
+}
+
+.nav-toggle[aria-expanded="true"] .icon-close {
+  display: block;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1080px) {
+  .header-inner {
+    padding-inline: var(--section-padding-x-mobile);
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .header-panel {
+    /*
+      Positioned absolutely against the sticky header (top: 100%) rather than
+      fixed with a bottom inset — the header's backdrop-filter establishes a
+      containing block for fixed descendants, which collapses a `bottom: 0`
+      inset to the header's own ~82px height instead of the viewport.
+    */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--bg-white);
+    border-top: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-menu);
+    max-height: calc(100vh - 5.125rem);
+    overflow-y: auto;
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+  }
+
+  .site-header.is-nav-open .header-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .primary-nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--space-3) var(--section-padding-x-mobile) var(--space-5);
+  }
+
+  .nav-static,
+  .primary-nav > .nav-link,
+  .nav-item .nav-link--menu {
+    color: var(--color-ink-secondary) !important;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-item {
+    position: static;
+  }
+
+  .mega-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+    box-shadow: none;
+    border: none;
+    background: var(--bg-lilac);
+    transition: none;
+  }
+
+  .nav-item.is-open .mega-menu {
+    display: block;
+  }
+
+  .mega-menu__inner {
+    padding: var(--space-4) 0 var(--space-4) var(--space-4);
+  }
+
+  .mega-menu__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .mega-menu__head a {
+    display: none;
+  }
+
+  .header-ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--section-padding-x-mobile);
+  }
+
+  .header-ctas .btn {
+    justify-content: center;
+  }
+
+  .header-ctas .btn--outline {
+    color: var(--color-ink-secondary);
+    border-color: var(--border-pill);
+  }
+}
+
+@media (min-width: 1081px) {
+  .header-panel {
+    display: flex !important;
+  }
+}
