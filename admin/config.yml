@@ -328,14 +328,17 @@ collections:
         label: Site settings
         file: src/content/settings/site.json
         fields:
-          - name: footerCode
-            label: "Footer code"
-            widget: code
-            default_language: html
-            output_code_only: true
-            allow_language_selection: false
+          - name: footerScripts
+            label: "Footer scripts"
+            label_singular: "script"
+            widget: list
             required: false
-            hint: "Scripts added just before </body> on every page, e.g. a feedback or analytics widget. Paste only code from sources you trust."
-          - { name: footerCodeEnabled, label: "Footer code switched on", widget: boolean, default: false }
+            summary: "{{name}}"
+            hint: "Code added just before </body> on every page, e.g. a feedback widget or a marketing pixel. Paste only code from sources you trust. For Google Analytics, use the Google Analytics ID field below instead."
+            fields:
+              - { name: name, label: "Name (for your reference)", widget: string }
+              - { name: code, label: "Code", widget: code, default_language: html, output_code_only: true, allow_language_selection: false }
+              - { name: enabled, label: "Switched on", widget: boolean, default: false }
+              - { name: needsConsent, label: "Only load after cookie consent", widget: boolean, default: true, hint: "Leave on for anything that tracks visitors (analytics, ads, heatmaps, chat widgets that set cookies). Turn off only for scripts that set no cookies." }
           - { name: analyticsId, label: "Google Analytics ID", widget: string, required: false, hint: "e.g. G-5C3XD2KRDR. Leave empty to turn off analytics and the cookie banner. Analytics only records visits on the live domain, and only after a visitor accepts cookies." }
           - { name: cookieBannerText, label: "Cookie banner text", widget: text, required: false, hint: "Shown with Accept / Reject buttons and a link to the cookie policy." }

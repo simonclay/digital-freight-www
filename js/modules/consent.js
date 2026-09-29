@@ -1,7 +1,9 @@
 // Cookie consent: a banner with Accept / Reject, remembered in the browser.
-// Google Analytics and the Contact page's Google Map only load after the
-// visitor accepts (or, for the map, clicks "Show map"). Rejecting later
-// removes any Analytics cookies already set. See CookieBanner.astro.
+// Google Analytics, footer scripts marked "only load after cookie consent"
+// (held in <template data-consent-scripts>) and the Contact page's Google Map
+// only load after the visitor accepts (or, for the map, clicks "Show map").
+// Rejecting later removes any Analytics cookies already set.
+// See CookieBanner.astro and BaseLayout.astro.
 
 const STORAGE_KEY = 'df-cookie-consent';
 
@@ -14,6 +16,24 @@ function saveChoice(choice) {
 }
 
 let analyticsLoaded = false;
+let consentScriptsLoaded = false;
+
+// Scripts added via innerHTML/template don't run, so each <script> is
+// recreated before being added to the page.
+function loadConsentScripts() {
+  if (consentScriptsLoaded) return;
+  consentScriptsLoaded = true;
+  document.querySelectorAll('template[data-consent-scripts]').forEach((template) => {
+    const content = template.content.cloneNode(true);
+    content.querySelectorAll('script').forEach((old) => {
+      const script = document.createElement('script');
+      [...old.attributes].forEach((attr) => script.setAttribute(attr.name, attr.value));
+      script.text = old.textContent;
+      old.replaceWith(script);
+    });
+    document.body.appendChild(content);
+  });
+}
 
 function loadAnalytics(id) {
   if (analyticsLoaded) return;
@@ -65,6 +85,7 @@ export function initConsent() {
   const apply = (choice) => {
     if (choice === 'granted') {
       showMaps();
+      loadConsentScripts();
       if (analyticsId && onLiveSite) loadAnalytics(analyticsId);
     } else if (choice === 'denied') {
       removeAnalyticsCookies();
@@ -76,8 +97,8 @@ export function initConsent() {
     saveChoice(choice);
     banner.hidden = true;
     apply(choice);
-    // Analytics can't be unloaded once running, so reload to stop it.
-    if (wasGranted && choice === 'denied' && analyticsLoaded) window.location.reload();
+    // Scripts can't be unloaded once running, so reload to stop them.
+    if (wasGranted && choice === 'denied' && (analyticsLoaded || consentScriptsLoaded)) window.location.reload();
   };
 
   banner.querySelectorAll('[data-consent]').forEach((button) => {
