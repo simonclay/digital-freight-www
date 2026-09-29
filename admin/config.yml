@@ -298,3 +298,18 @@ collections:
       - { name: name, label: "Role (e.g. \"Sales Director\")", widget: string }
       - { name: role, label: Company, widget: string }
       - { name: order, label: "Sort order (1-7)", widget: number, value_type: int }
+
+  - name: legal
+    label: Legal
+    label_singular: Legal page
+    folder: src/content/legal
+    create: true
+    format: frontmatter
+    extension: md
+    slug: "{{slug}}"
+    sortable_fields: [order, title]
+    fields:
+      - { name: title, label: Title, widget: string, hint: "Also used as the footer link text" }
+      - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
+      - { name: body, label: "Policy text", widget: markdown }
+      - { name: order, label: "Footer position (1 = first)", widget: number, value_type: int }

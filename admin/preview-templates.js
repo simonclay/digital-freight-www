@@ -283,6 +283,6 @@ function livePreview(route) {
 
 // One per Sveltia collection, or per file in the "pages" file collection.
 // Each name must also be listed in TYPES in src/preview/render.astro.
-['news', 'services', 'sectors', 'home', 'about', 'ior-and-eor', 'contact'].forEach((name) => {
+['news', 'services', 'sectors', 'home', 'about', 'ior-and-eor', 'contact', 'legal'].forEach((name) => {
   CMS.registerPreviewTemplate(name, livePreview(`/preview/${name}`));
 });
