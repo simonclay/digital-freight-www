@@ -40,6 +40,48 @@ function jumpToField(keyPath, locale) {
     { type: 'highlight-editor-field', payload: { locale, keyPath } },
     window.location.origin,
   );
+  flashEditorField(keyPath);
+}
+
+// Sveltia only scrolls to the field and focuses it, which is easy to miss
+// (a toggle's focus ring is tiny), so briefly highlight the whole field too.
+const FIELD_FLASH_CSS = `
+  @keyframes cms-field-flash {
+    0%, 40% { outline-color: #FF3D9A; background-color: rgba(255, 61, 154, 0.12); }
+    100% { outline-color: transparent; background-color: transparent; }
+  }
+  .cms-field-flash {
+    outline: 3px solid transparent;
+    outline-offset: 4px;
+    border-radius: 8px;
+    animation: cms-field-flash 1.6s ease-out;
+  }
+`;
+
+function flashEditorField(keyPath) {
+  if (!document.getElementById('cms-field-flash-style')) {
+    const style = document.createElement('style');
+    style.id = 'cms-field-flash-style';
+    style.textContent = FIELD_FLASH_CSS;
+    document.head.appendChild(style);
+  }
+  // Sveltia may first expand a collapsed group or switch panes, so look for
+  // the field a few times rather than once.
+  let tries = 0;
+  const find = () => {
+    const field = document.querySelector(
+      `.content-editor .pane[data-mode="edit"] .field[data-key-path="${CSS.escape(keyPath)}"]`,
+    );
+    if (field) {
+      field.classList.remove('cms-field-flash');
+      void field.offsetWidth; // restart the animation on repeat clicks
+      field.classList.add('cms-field-flash');
+      setTimeout(() => field.classList.remove('cms-field-flash'), 1700);
+    } else if (++tries < 10) {
+      setTimeout(find, 60);
+    }
+  };
+  setTimeout(find, 60);
 }
 
 /**
