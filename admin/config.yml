@@ -195,6 +195,7 @@ collections:
       - { name: title, label: Title, widget: string }
       - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
       - { name: heroLede, label: "Intro line (page banner + homepage card)", widget: text }
+      - { name: menuDescription, label: "Short description (menu and \"Other…\" cards)", widget: string, hint: "One short sentence, shown in the header menu and at the foot of the other pages" }
       - { name: teaserLinkLabel, label: "Homepage card link text", widget: string, hint: "e.g. \"Road freight →\"" }
       - name: motif
         label: "Decorative icons"
@@ -237,6 +238,7 @@ collections:
       - { name: index, label: "Number badge (01, 02, 03, 04)", widget: string }
       - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
       - { name: heroLede, label: "Intro line (page banner + homepage card)", widget: text }
+      - { name: menuDescription, label: "Short description (menu and \"Other…\" cards)", widget: string, hint: "One short sentence, shown in the header menu and at the foot of the other pages" }
       - name: motif
         label: "Decorative icons"
         widget: object
