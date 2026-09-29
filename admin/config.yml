@@ -187,6 +187,7 @@ collections:
     format: frontmatter
     extension: md
     slug: "{{slug}}"
+    reorder: true
     fields:
       - { name: title, label: Title, widget: string }
       - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
@@ -218,7 +219,7 @@ collections:
           - { name: value, label: "Text", widget: string }
       - { name: ctaTitle, label: "Bottom banner title", widget: string }
       - { name: ctaBody, label: "Bottom banner text", widget: string }
-      - { name: order, label: "Sort order (1, 2, 3...)", widget: number, value_type: int }
+      - { name: order, label: "Position (set by dragging in the list)", widget: number, value_type: int, required: false }
 
   - name: sectors
     label: Sectors
@@ -227,6 +228,7 @@ collections:
     format: frontmatter
     extension: md
     slug: "{{slug}}"
+    reorder: true
     fields:
       - { name: title, label: Title, widget: string }
       - { name: index, label: "Number badge (01, 02, 03, 04)", widget: string }
@@ -255,7 +257,7 @@ collections:
         field: { name: item, widget: string }
       - { name: ctaTitle, label: "Bottom banner title", widget: string }
       - { name: ctaBody, label: "Bottom banner text", widget: string }
-      - { name: order, label: "Sort order (1, 2, 3, 4)", widget: number, value_type: int }
+      - { name: order, label: "Position (set by dragging in the list)", widget: number, value_type: int, required: false }
 
   - name: news
     label: News
@@ -264,6 +266,9 @@ collections:
     format: frontmatter
     extension: md
     slug: "{{slug}}"
+    reorder: true
+    thumbnail: image
+    summary: "{{title}} · {{category}}"
     fields:
       - { name: title, label: Title, widget: string }
       - { name: category, label: "Category label", widget: string, hint: "e.g. \"Customs\" or \"Portal · Product update\"" }
@@ -284,7 +289,7 @@ collections:
       - { name: ctaBody, label: "Bottom banner text", widget: string }
       - { name: ctaLabel, label: "Bottom banner button text", widget: string }
       - { name: ctaHref, label: "Bottom banner button link", widget: string }
-      - { name: order, label: "Sort order (1, 2, 3...)", widget: number, value_type: int }
+      - { name: order, label: "Position (set by dragging in the list)", widget: number, value_type: int, required: false }
 
   - name: testimonials
     label: Testimonials
@@ -293,11 +298,13 @@ collections:
     format: frontmatter
     extension: md
     slug: "{{slug}}"
+    reorder: true
+    summary: "{{role}}, {{name}}"
     fields:
       - { name: quote, label: Quote, widget: text }
       - { name: name, label: "Role (e.g. \"Sales Director\")", widget: string }
       - { name: role, label: Company, widget: string }
-      - { name: order, label: "Sort order (1-7)", widget: number, value_type: int }
+      - { name: order, label: "Position (set by dragging in the list)", widget: number, value_type: int, required: false }
 
   - name: legal
     label: Legal
@@ -306,10 +313,31 @@ collections:
     create: true
     format: frontmatter
     extension: md
-    slug: "{{slug}}"
-    sortable_fields: [order, title]
+    # Editable: the pencil next to the title renames the page's web address.
+    # Once a site is live, changing it breaks links to the old address.
+    slug:
+      template: "{{slug}}"
+      editable: true
+    reorder: true
     fields:
       - { name: title, label: Title, widget: string, hint: "Also used as the footer link text" }
       - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
       - { name: body, label: "Policy text", widget: markdown }
-      - { name: order, label: "Footer position (1 = first)", widget: number, value_type: int }
+      - { name: order, label: "Footer position (set by dragging in the list)", widget: number, value_type: int, required: false }
+
+  - name: settings
+    label: Site settings
+    files:
+      - name: site
+        label: Site settings
+        file: src/content/settings/site.json
+        fields:
+          - name: footerCode
+            label: "Footer code"
+            widget: code
+            default_language: html
+            output_code_only: true
+            allow_language_selection: false
+            required: false
+            hint: "Scripts added just before </body> on every page, e.g. a feedback or analytics widget. Paste only code from sources you trust."
+          - { name: footerCodeEnabled, label: "Footer code switched on", widget: boolean, default: false }
