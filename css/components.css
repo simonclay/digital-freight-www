@@ -471,3 +471,54 @@
   width: 28px;
   height: 28px;
 }
+
+/* ---------- Cookie consent banner (CookieBanner.astro, js/modules/consent.js) ---------- */
+
+.consent-banner {
+  position: fixed;
+  left: var(--space-4);
+  right: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 1000;
+  max-width: 56rem;
+  margin-inline: auto;
+  padding: var(--space-5) var(--space-6);
+  background: var(--bg-white);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-menu);
+}
+
+.consent-banner[hidden] {
+  display: none;
+}
+
+.consent-banner__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.consent-banner__text {
+  flex: 1;
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--color-body);
+}
+
+.consent-banner__text a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.consent-banner__actions {
+  flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+  .consent-banner__inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-4);
+  }
+}

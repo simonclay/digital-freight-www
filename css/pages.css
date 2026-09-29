@@ -568,6 +568,29 @@
   display: block;
 }
 
+.contact-map {
+  position: relative;
+}
+
+.contact-map__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  text-align: center;
+  background: var(--bg-lilac);
+  color: var(--color-body);
+  font-size: var(--text-base);
+}
+
+.contact-map__placeholder[hidden] {
+  display: none;
+}
+
 /* ---------- News listing ---------- */
 
 .news-meta-row {

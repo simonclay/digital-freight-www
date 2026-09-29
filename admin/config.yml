@@ -337,3 +337,5 @@ collections:
             required: false
             hint: "Scripts added just before </body> on every page, e.g. a feedback or analytics widget. Paste only code from sources you trust."
           - { name: footerCodeEnabled, label: "Footer code switched on", widget: boolean, default: false }
+          - { name: analyticsId, label: "Google Analytics ID", widget: string, required: false, hint: "e.g. G-5C3XD2KRDR. Leave empty to turn off analytics and the cookie banner. Analytics only records visits on the live domain, and only after a visitor accepts cookies." }
+          - { name: cookieBannerText, label: "Cookie banner text", widget: text, required: false, hint: "Shown with Accept / Reject buttons and a link to the cookie policy." }

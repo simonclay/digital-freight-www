@@ -108,6 +108,21 @@
   color: var(--color-muted-on-dark);
 }
 
+.site-footer__consent {
+  padding: 0;
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--color-muted-on-dark);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.site-footer__consent[hidden] {
+  display: none;
+}
+
+.site-footer__consent:hover,
 .site-footer__legal a:hover {
   color: #FF7DBF;
 }
