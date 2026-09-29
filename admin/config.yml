@@ -334,7 +334,7 @@ collections:
             widget: list
             required: false
             summary: "{{name}}"
-            hint: "Code added just before </body> on every page, e.g. a feedback widget or a marketing pixel. Paste only code from sources you trust. For Google Analytics, use the Google Analytics ID field below instead."
+            hint: "Extra code that runs on every page of the website, such as a feedback widget, live chat or a marketing tracking code. Only paste code from services you trust. For Google Analytics, use the Google Analytics ID field below instead."
             fields:
               - { name: name, label: "Name (for your reference)", widget: string }
               - { name: code, label: "Code", widget: code, default_language: html, output_code_only: true, allow_language_selection: false }
