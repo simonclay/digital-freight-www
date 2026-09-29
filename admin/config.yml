@@ -187,6 +187,7 @@ collections:
     format: frontmatter
     extension: md
     slug: "{{slug}}"
+    # The Reorder button in the list sets each entry's `order` (no form field needed).
     reorder: true
     fields:
       - { name: title, label: Title, widget: string }
@@ -219,7 +220,6 @@ collections:
           - { name: value, label: "Text", widget: string }
       - { name: ctaTitle, label: "Bottom banner title", widget: string }
       - { name: ctaBody, label: "Bottom banner text", widget: string }
-      - { name: order, label: "Position (set by dragging in the list)", widget: number, value_type: int, required: false }
 
   - name: sectors
     label: Sectors
@@ -257,7 +257,6 @@ collections:
         field: { name: item, widget: string }
       - { name: ctaTitle, label: "Bottom banner title", widget: string }
       - { name: ctaBody, label: "Bottom banner text", widget: string }
-      - { name: order, label: "Position (set by dragging in the list)", widget: number, value_type: int, required: false }
 
   - name: news
     label: News
@@ -289,7 +288,6 @@ collections:
       - { name: ctaBody, label: "Bottom banner text", widget: string }
       - { name: ctaLabel, label: "Bottom banner button text", widget: string }
       - { name: ctaHref, label: "Bottom banner button link", widget: string }
-      - { name: order, label: "Position (set by dragging in the list)", widget: number, value_type: int, required: false }
 
   - name: testimonials
     label: Testimonials
@@ -304,7 +302,6 @@ collections:
       - { name: quote, label: Quote, widget: text }
       - { name: name, label: "Role (e.g. \"Sales Director\")", widget: string }
       - { name: role, label: Company, widget: string }
-      - { name: order, label: "Position (set by dragging in the list)", widget: number, value_type: int, required: false }
 
   - name: legal
     label: Legal
@@ -323,7 +320,6 @@ collections:
       - { name: title, label: Title, widget: string, hint: "Also used as the footer link text" }
       - { name: metaDescription, label: "Meta description (for search engines)", widget: text }
       - { name: body, label: "Policy text", widget: markdown }
-      - { name: order, label: "Footer position (set by dragging in the list)", widget: number, value_type: int, required: false }
 
   - name: settings
     label: Site settings
