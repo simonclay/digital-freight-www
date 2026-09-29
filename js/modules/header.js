@@ -21,7 +21,11 @@ export function initHeader() {
   // Highlight whichever nav item matches the page we're actually on.
   const path = window.location.pathname;
   header.querySelectorAll('[data-nav-link]').forEach((link) => {
-    const linkPath = new URL(link.getAttribute('href'), window.location.origin).pathname;
+    // document.baseURI rather than location.origin: they're the same on the
+    // real site, but in the CMS live preview the page is shown via srcdoc,
+    // where location.origin is "null" and would throw here, stopping the
+    // rest of main.js (icons, testimonials) from running.
+    const linkPath = new URL(link.getAttribute('href'), document.baseURI).pathname;
     if (linkPath !== '/' && path.startsWith(linkPath)) {
       link.classList.add('is-current');
       link.setAttribute('aria-current', 'page');

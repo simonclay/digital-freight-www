@@ -123,6 +123,7 @@ collections:
               - { name: icon, label: "Main icon (Lucide icon name)", widget: string }
               - { name: nodeTop, label: "Top-right icon", widget: string }
               - { name: nodeBottom, label: "Bottom-left icon", widget: string }
+          - { name: body, label: "Article body (intro, IOR, EOR and summary sections)", widget: markdown }
           - name: byline
             label: "Author byline (optional)"
             widget: object
@@ -148,7 +149,6 @@ collections:
           - { name: ctaBody, label: "Bottom banner text", widget: string }
           - { name: ctaLabel, label: "Bottom banner button text", widget: string }
           - { name: ctaHref, label: "Bottom banner button link", widget: string }
-          - { name: body, label: "Article body (intro, IOR, EOR and summary sections)", widget: markdown }
 
       - name: contact
         label: Contact
@@ -200,6 +200,7 @@ collections:
           - { name: icon, label: "Main icon (Lucide icon name)", widget: string }
           - { name: nodeTop, label: "Top-right icon", widget: string }
           - { name: nodeBottom, label: "Bottom-left icon", widget: string }
+      - { name: body, label: "Intro paragraph(s)", widget: markdown }
       - name: features
         label: "Feature list (3 shown)"
         widget: list
@@ -211,13 +212,13 @@ collections:
       - name: sidebarItems
         label: "Sidebar items"
         widget: list
+        summary: "{{label}} {{value}}"
         fields:
-          - { name: label, widget: string }
-          - { name: value, widget: string }
+          - { name: label, label: "Label (optional, shown in bold)", widget: string, required: false, hint: "e.g. \"Daily\". Leave empty for a plain line." }
+          - { name: value, label: "Text", widget: string }
       - { name: ctaTitle, label: "Bottom banner title", widget: string }
       - { name: ctaBody, label: "Bottom banner text", widget: string }
       - { name: order, label: "Sort order (1, 2, 3...)", widget: number, value_type: int }
-      - { name: body, label: "Intro paragraph(s)", widget: markdown }
 
   - name: sectors
     label: Sectors
@@ -239,6 +240,7 @@ collections:
           - { name: icon, label: "Main icon (Lucide icon name)", widget: string }
           - { name: nodeTop, label: "Top-right icon", widget: string }
           - { name: nodeBottom, label: "Bottom-left icon", widget: string }
+      - { name: body, label: "Intro paragraph(s)", widget: markdown }
       - name: features
         label: "Feature list (3 shown)"
         widget: list
@@ -254,7 +256,6 @@ collections:
       - { name: ctaTitle, label: "Bottom banner title", widget: string }
       - { name: ctaBody, label: "Bottom banner text", widget: string }
       - { name: order, label: "Sort order (1, 2, 3, 4)", widget: number, value_type: int }
-      - { name: body, label: "Intro paragraph(s)", widget: markdown }
 
   - name: news
     label: News
@@ -270,6 +271,7 @@ collections:
       - { name: image, label: "Featured image", widget: image, required: false }
       - { name: imageAlt, label: "Image alt text", widget: string, required: false }
       - { name: isSample, label: "Sample/placeholder article", widget: boolean, default: false, hint: "Shows a \"sample article\" notice on the page" }
+      - { name: body, label: "Article body", widget: markdown }
       - name: byline
         label: "Author byline (optional)"
         widget: object
@@ -283,7 +285,6 @@ collections:
       - { name: ctaLabel, label: "Bottom banner button text", widget: string }
       - { name: ctaHref, label: "Bottom banner button link", widget: string }
       - { name: order, label: "Sort order (1, 2, 3...)", widget: number, value_type: int }
-      - { name: body, label: "Article body", widget: markdown }
 
   - name: testimonials
     label: Testimonials
