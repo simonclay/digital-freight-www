@@ -24,6 +24,7 @@ const DEBOUNCE_MS = 400;
 // under the pointer, so it's clear what a click will jump to.
 const CLICK_TO_EDIT_CSS = `
   .cms-hover { outline: 2px solid #7C3AED !important; outline-offset: 4px; border-radius: 4px; cursor: pointer; }
+  .cms-hidden-note { margin: 0; padding: 18px 20px; border: 2px dashed #C9B8DA; border-radius: 12px; color: #5C4A6E; text-align: center; font-size: 15px; }
   .cms-flash { outline: 3px solid #FF3D9A !important; outline-offset: 4px; border-radius: 4px; transition: outline-color 0.6s ease; }
 `;
 

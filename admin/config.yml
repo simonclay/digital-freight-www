@@ -64,6 +64,7 @@ collections:
             fields:
               - { name: label, label: "Bold lead-in", widget: string }
               - { name: body, label: "Rest of the sentence", widget: string }
+          - { name: showTestimonials, label: "Testimonials: show this section", widget: boolean, default: true, hint: "Untick to hide the whole testimonials section on the homepage" }
           - { name: testimonialsEyebrow, label: "Testimonials: eyebrow", widget: string }
           - { name: testimonialsTitle, label: "Testimonials: heading", widget: string }
           - { name: testimonialsLede, label: "Testimonials: intro line", widget: text }
@@ -306,6 +307,7 @@ collections:
     reorder: true
     summary: "{{role}}, {{name}}"
     fields:
+      - { name: published, label: "Show on website", widget: boolean, default: true, hint: "Untick to hide this testimonial without deleting it" }
       - { name: quote, label: Quote, widget: text }
       - { name: name, label: "Role (e.g. \"Sales Director\")", widget: string }
       - { name: role, label: Company, widget: string }
