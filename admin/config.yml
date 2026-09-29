@@ -14,6 +14,7 @@ public_folder: /assets/images/uploads
 collections:
   - name: pages
     label: Pages
+    icon: description
     files:
       - name: home
         label: Homepage
@@ -182,6 +183,7 @@ collections:
 
   - name: services
     label: Services
+    icon: local_shipping
     folder: src/content/services
     create: true
     format: frontmatter
@@ -223,6 +225,7 @@ collections:
 
   - name: sectors
     label: Sectors
+    icon: factory
     folder: src/content/sectors
     create: true
     format: frontmatter
@@ -260,6 +263,7 @@ collections:
 
   - name: news
     label: News
+    icon: newspaper
     folder: src/content/news
     create: true
     format: frontmatter
@@ -291,6 +295,7 @@ collections:
 
   - name: testimonials
     label: Testimonials
+    icon: format_quote
     folder: src/content/testimonials
     create: true
     format: frontmatter
@@ -305,6 +310,7 @@ collections:
 
   - name: legal
     label: Legal
+    icon: gavel
     label_singular: Legal page
     folder: src/content/legal
     create: true
@@ -323,6 +329,7 @@ collections:
 
   - name: settings
     label: Site settings
+    icon: settings
     files:
       - name: site
         label: Site settings
