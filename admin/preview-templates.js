@@ -46,15 +46,14 @@ function jumpToField(keyPath, locale) {
 // Sveltia only scrolls to the field and focuses it, which is easy to miss
 // (a toggle's focus ring is tiny), so briefly highlight the whole field too.
 const FIELD_FLASH_CSS = `
+  /* Drawn inside the field: Sveltia's field boxes clip anything outside. */
   @keyframes cms-field-flash {
-    0%, 40% { outline-color: #FF3D9A; background-color: rgba(255, 61, 154, 0.12); }
-    100% { outline-color: transparent; background-color: transparent; }
+    0%, 50% { box-shadow: inset 0 0 0 3px #FF3D9A; background-color: rgba(255, 61, 154, 0.22); }
+    100% { box-shadow: inset 0 0 0 3px transparent; background-color: transparent; }
   }
   .cms-field-flash {
-    outline: 3px solid transparent;
-    outline-offset: 4px;
     border-radius: 8px;
-    animation: cms-field-flash 1.6s ease-out;
+    animation: cms-field-flash 2s ease-out;
   }
 `;
 
@@ -76,7 +75,7 @@ function flashEditorField(keyPath) {
       field.classList.remove('cms-field-flash');
       void field.offsetWidth; // restart the animation on repeat clicks
       field.classList.add('cms-field-flash');
-      setTimeout(() => field.classList.remove('cms-field-flash'), 1700);
+      setTimeout(() => field.classList.remove('cms-field-flash'), 2100);
     } else if (++tries < 10) {
       setTimeout(find, 60);
     }
