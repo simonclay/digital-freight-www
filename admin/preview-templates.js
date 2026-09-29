@@ -72,6 +72,7 @@ function flashEditorField(keyPath) {
       `.content-editor .pane[data-mode="edit"] .field[data-key-path="${CSS.escape(keyPath)}"]`,
     );
     if (field) {
+      field.scrollIntoView({ block: 'center', behavior: 'smooth' });
       field.classList.remove('cms-field-flash');
       void field.offsetWidth; // restart the animation on repeat clicks
       field.classList.add('cms-field-flash');
@@ -139,6 +140,8 @@ function livePreview(route) {
     componentDidMount() {
       this.requestId = 0;
       this.scrollY = 0;
+      this.lastPreviewClick = 0;
+      document.addEventListener('focusin', this.onEditorFocus);
       this.refresh();
     },
 
@@ -151,6 +154,32 @@ function livePreview(route) {
 
     componentWillUnmount() {
       clearTimeout(this.timer);
+      document.removeEventListener('focusin', this.onEditorFocus);
+    },
+
+    // Clicking into a field on the left scrolls the preview to the part of
+    // the page it controls and flashes it. Nested fields fall back to their
+    // nearest tagged parent (e.g. a list item's group).
+    onEditorFocus(event) {
+      // A jump from the preview also focuses the field: don't bounce back.
+      if (Date.now() - this.lastPreviewClick < 1000) return;
+      const field = event.target.closest && event.target.closest(
+        '.content-editor .pane[data-mode="edit"] .field[data-key-path]',
+      );
+      const doc = this.frame && this.frame.contentDocument;
+      if (!field || !doc) return;
+      let keyPath = field.dataset.keyPath;
+      let el = null;
+      while (keyPath && !el) {
+        el = doc.querySelector(`[data-cms-field="${CSS.escape(keyPath)}"]`);
+        keyPath = keyPath.includes('.') ? keyPath.slice(0, keyPath.lastIndexOf('.')) : '';
+      }
+      if (!el) return;
+      el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      el.classList.remove('cms-flash');
+      void el.offsetWidth;
+      el.classList.add('cms-flash');
+      setTimeout(() => el.classList.remove('cms-flash'), 900);
     },
 
     async refresh() {
@@ -278,6 +307,7 @@ function livePreview(route) {
           }
           event.preventDefault();
           event.stopPropagation();
+          this.lastPreviewClick = Date.now();
           el.classList.add('cms-flash');
           setTimeout(() => el.classList.remove('cms-flash'), 600);
           jumpToField(el.dataset.cmsField, this.props.locale || '_default');
