@@ -471,6 +471,33 @@
   }
 }
 
+/* ---------- Why choose us ---------- */
+
+.why-us {
+  background: var(--bg-lilac);
+}
+
+.why-us__title {
+  max-width: 40rem;
+  margin: 0 auto var(--space-10);
+  text-align: center;
+}
+
+.why-us-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-testimonial);
+}
+
+.why-us-item__text {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
 /* ---------- Testimonials ---------- */
 
 .testimonials {

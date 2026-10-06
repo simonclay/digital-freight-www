@@ -64,6 +64,11 @@ collections:
             fields:
               - { name: label, label: "Bold lead-in", widget: string }
               - { name: body, label: "Rest of the sentence", widget: string }
+          - { name: whyChooseTitle, label: "Why choose us: heading", widget: string }
+          - name: whyChooseItems
+            label: "Why choose us: checklist items"
+            widget: list
+            field: { name: item, widget: string }
           - { name: showTestimonials, label: "Testimonials: show this section", widget: boolean, default: true, hint: "Untick to hide the whole testimonials section on the homepage" }
           - { name: testimonialsEyebrow, label: "Testimonials: eyebrow", widget: string }
           - { name: testimonialsTitle, label: "Testimonials: heading", widget: string }
