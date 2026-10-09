@@ -485,17 +485,24 @@
 
 .why-us-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-4);
-  padding: var(--space-5) var(--space-6);
+  padding: var(--space-6);
   background: var(--bg-white);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-testimonial);
 }
 
-.why-us-item__text {
+.why-us-item__title {
   font-weight: 600;
   color: var(--color-ink);
+}
+
+.why-us-item__body {
+  margin-top: var(--space-1);
+  font-size: var(--text-base-alt);
+  line-height: 1.6;
+  color: var(--color-body);
 }
 
 /* ---------- Testimonials ---------- */

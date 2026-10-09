@@ -68,7 +68,9 @@ collections:
           - name: whyChooseItems
             label: "Why choose us: checklist items"
             widget: list
-            field: { name: item, widget: string }
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: body, label: "Explainer line", widget: string }
           - { name: showTestimonials, label: "Testimonials: show this section", widget: boolean, default: true, hint: "Untick to hide the whole testimonials section on the homepage" }
           - { name: testimonialsEyebrow, label: "Testimonials: eyebrow", widget: string }
           - { name: testimonialsTitle, label: "Testimonials: heading", widget: string }
@@ -213,7 +215,7 @@ collections:
           - { name: nodeBottom, label: "Bottom-left icon", widget: string }
       - { name: body, label: "Intro paragraph(s)", widget: markdown }
       - name: features
-        label: "Feature list (3 shown)"
+        label: "Feature list"
         widget: list
         fields:
           - { name: icon, label: "Icon (Lucide icon name)", widget: string }
@@ -255,7 +257,7 @@ collections:
           - { name: nodeBottom, label: "Bottom-left icon", widget: string }
       - { name: body, label: "Intro paragraph(s)", widget: markdown }
       - name: features
-        label: "Feature list (3 shown)"
+        label: "Feature list"
         widget: list
         fields:
           - { name: icon, label: "Icon (Lucide icon name)", widget: string }
