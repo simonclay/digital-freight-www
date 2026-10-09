@@ -263,9 +263,19 @@
 }
 
 .portal-mock__url {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   margin-left: 0.75rem;
   font-size: 0.78125rem;
   color: var(--color-faint-on-dark);
+}
+
+.portal-mock__shot {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .portal-mock__body {
