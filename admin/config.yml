@@ -302,6 +302,16 @@ collections:
       - { name: excerpt, label: "Card excerpt", widget: text }
       - { name: image, label: "Featured image", widget: image, required: false }
       - { name: imageAlt, label: "Image alt text", widget: string, required: false }
+      - name: imagePosition
+        label: "Image position"
+        hint: "Which part of the image stays in view when it's cropped to fit the banner and news cards"
+        widget: select
+        required: false
+        default: center
+        options:
+          - { label: Top, value: top }
+          - { label: Centre, value: center }
+          - { label: Bottom, value: bottom }
       - { name: isSample, label: "Sample/placeholder article", widget: boolean, default: false, hint: "Shows a \"sample article\" notice on the page" }
       - { name: body, label: "Article body", widget: markdown }
       - name: byline
